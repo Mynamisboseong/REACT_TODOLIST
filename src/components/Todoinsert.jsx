@@ -1,29 +1,29 @@
-import { useState } from "react";
+import { useState } from "react"
 
-function Todoinsert({onInsert}) {
+function Todoinsert({ onInsert }) {
   const [text, setText] = useState("")
 
   const onChange = (e) => {
-    console.log(e.target.value);
     setText(e.target.value)
   }
 
   const onSubmit = (e) => {
-    onInsert(text);
+    onInsert(text)
     setText("")
-    e.preventDefault();
+    e.preventDefault()
   }
 
-    return (
+  return (
     <form onSubmit={onSubmit}>
-      <input type="text"
-      value = {text} 
-      placeholder="할 일을 입력하세요." 
-      onChange={onChange}
+      <input
+        type="text"
+        value={text}
+        placeholder="할 일을 입력하세요."
+        onChange={onChange}
       />
       <button type="submit">입력</button>
     </form>
-  );
+  )
 }
 
-export default Todoinsert;
+export default Todoinsert

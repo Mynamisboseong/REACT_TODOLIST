@@ -1,5 +1,5 @@
 import "./App.css"
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Todoinsert from "./components/Todoinsert"
 import TodoList from "./components/TodoList"
 
@@ -23,20 +23,35 @@ function App() {
     },
   ])
 
+  const nextId = useRef(4)
+
   const onInsert = (text) => {
     setTodos(
-      todos.concat({
-        id: 4,
+      todos.concat([{
+        id: nextId.current,
         text: text,
         checked: false,
-      })
+      }])
+    )
+    nextId.current++
+  }
+
+  const onDelete = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  const onToggle = (id) => {
+    setTodos (
+      todos.map(todo => 
+        todo.id === id ? {...todo, checked: !todo.checked}:todo 
+      )
     )
   }
   // view 구역
   return (
     <div>
       <Todoinsert onInsert={onInsert} />
-      <TodoList todos={todos} />
+      <TodoList todos={todos} onDelete={onDelete} onToggle={onToggle}/>
     </div>
   )
 }
