@@ -23,11 +23,11 @@ function App() {
     },
   ])
 
-  const onInsert = () => {
+  const onInsert = (text) => {
     setTodos(
       todos.concat({
         id: 4,
-        text: "입력테스트",
+        text: text,
         checked: false,
       })
     )
